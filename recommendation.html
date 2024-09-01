@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #bookList, #recommendations {
+            width: 300px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .book-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .book-item:hover {
+            background-color: #f0f0f0;
+        }
+        #recommendations h2 {
+            font-size: 20px;
+            color: #444;
+        }
+        .recommendation-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Book Recommendation System</h1>
+
+    <div id="bookList">
+        <h2>Select Your Favorite Book:</h2>
+        <div class="book-item" data-genre="fantasy">Harry Potter</div>
+        <div class="book-item" data-genre="science fiction">Dune</div>
+        <div class="book-item" data-genre="mystery">Sherlock Holmes</div>
+        <div class="book-item" data-genre="fantasy">The Hobbit</div>
+        <div class="book-item" data-genre="science fiction">Ender's Game</div>
+        <div class="book-item" data-genre="mystery">The Da Vinci Code</div>
+    </div>
+
+    <div id="recommendations">
+        <h2>Recommendations:</h2>
+        <div id="recommendationList"></div>
+    </div>
+
+    <script>
+        const books = {
+            fantasy: ["The Lord of the Rings", "A Song of Ice and Fire", "The Name of the Wind"],
+            "science fiction": ["Neuromancer", "Foundation", "The Left Hand of Darkness"],
+            mystery: ["Gone Girl", "The Girl with the Dragon Tattoo", "Big Little Lies"]
+        };
+
+        document.querySelectorAll('.book-item').forEach(item => {
+            item.addEventListener('click', event => {
+                const genre = event.target.getAttribute('data-genre');
+                displayRecommendations(genre);
+            });
+        });
+
+        function displayRecommendations(genre) {
+            const recommendationList = document.getElementById('recommendationList');
+            recommendationList.innerHTML = ''; // Clear previous recommendations
+
+            books[genre].forEach(book => {
+                const div = document.createElement('div');
+                div.className = 'recommendation-item';
+                div.textContent = book;
+                recommendationList.appendChild(div);
+            });
+        }
+    </script>
+
+</body>
+</html>

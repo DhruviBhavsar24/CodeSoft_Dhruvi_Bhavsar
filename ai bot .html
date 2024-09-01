@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Dhruvi's ChatBot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .user-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn-send {
+            padding: 10px 20px;
+            border: none;
+            background: palevioletred;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2 style="color: palevioletred;">Welcome to Dhruvi's ChatBot</h2>
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" class="user-input" placeholder="Type your message here...">
+        <button onclick="handleUserInput()" class="btn-send">Send</button>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = `${sender}: ${message}`;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function handleUserInput() {
+            const userText = userInput.value.trim();
+            if (userText === '') return;
+
+            appendMessage('User', userText);
+            const botResponse = getBotResponse(userText);
+            appendMessage('Bot', botResponse);
+
+            userInput.value = '';
+        }
+
+        function getBotResponse(userText) {
+            // Convert user input to lower case for easier matching
+            const message = userText.toLowerCase();
+
+            // Simple rule-based responses
+            if (message.includes('hello') || message.includes('hi')) {
+                return 'Hello! How can I assist you today?';
+            } else if (message.includes('how are you')) {
+                return 'I am just a bot, but I am doing great! Thanks for asking.';
+            } else if (message.includes('bye')) {
+                return 'Goodbye! Have a great day!';
+            } else if (message.includes('name')) {
+                return 'I am a simple rule-based chatbot. You can call me ChatBot!';
+            } else {
+                return 'I am sorry, I did not understand that. Can you please rephrase?';
+            }
+        }
+    </script>
+</body>
+</html>
